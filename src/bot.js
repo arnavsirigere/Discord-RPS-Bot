@@ -7,6 +7,10 @@ const tellScore = require('./commands/score');
 const help = require('./commands/help');
 const { replies, shortReply } = require('./commands/phrases');
 
+// Keeping the bot alive
+const keepAlive = require('../server');
+keepAlive();
+
 // Getting all the data of the game history from Firebase
 const firebaseConfig = process.env.FIREBASE_CONFIG.split(' ');
 const app = firebase.initializeApp({
