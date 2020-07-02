@@ -58,6 +58,14 @@ client.on('message', (message) => {
 
 // Get all the game history of the user
 function getUserData(id, data) {
+  // Just in case user doesn't have a game history
+  let newData = {
+    id,
+    history: [0], // We're putting dummy data just so firebase registers it
+    userScore: 0,
+    aiScore: 0,
+  };
+
   if (data) {
     let keys = Object.keys(data);
     for (let i = 0; i < keys.length; i++) {
@@ -67,13 +75,9 @@ function getUserData(id, data) {
         return userData;
       }
     }
+    ref.push(newData);
+    return newData;
   } else {
-    let newData = {
-      id,
-      history: [0], // We're putting dummy data just so firebase registers it
-      userScore: 0,
-      aiScore: 0,
-    };
     ref.push(newData);
     return newData;
   }
