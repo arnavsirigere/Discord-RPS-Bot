@@ -6,6 +6,7 @@ const game = require('./commands/game');
 const tellScore = require('./commands/score');
 const help = require('./commands/help');
 const { replies, shortReply } = require('./commands/phrases');
+const leaderboard = require('./commands/leaderboard');
 
 // Keeping the bot alive
 const keepAlive = require('../server');
@@ -41,7 +42,9 @@ client.on('message', (message) => {
   let command = message.content.toLowerCase().split(/\s+/);
   if (command[0] == 'rps!') {
     let id = message.author.id;
-    let userData = getUserData(id, data);
+    let name = message.author.username;
+    let userData = getUserData(id, name, data);
+    userData.name = name; // Just in case user changes username later
     if (['rock', 'paper', 'scissors'].includes(command[1])) {
       game(userData, command[1], message, ref, data, database);
     } else if (command[1] == 'score') {
@@ -50,6 +53,12 @@ client.on('message', (message) => {
       help(message);
     } else if (Object.keys(replies).includes(command[1])) {
       shortReply(command[1], message);
+    } else if (command[1] == 'leaderboard') {
+      if (command[2] && /\d+/.test(command[2])) {
+        leaderboard(id, message, data, userData, command[2]);
+      } else {
+        leaderboard(id, message, data, userData);
+      }
     } else {
       message.reply(`That command doesn't exist ¯\\_(ツ)_/¯ , yet`);
     }
@@ -57,13 +66,15 @@ client.on('message', (message) => {
 });
 
 // Get all the game history of the user
-function getUserData(id, data) {
+function getUserData(id, name, data) {
   // Just in case user doesn't have a game history
   let newData = {
     id,
+    name,
     history: [0], // We're putting dummy data just so firebase registers it
     userScore: 0,
     aiScore: 0,
+    played: false,
   };
 
   if (data) {

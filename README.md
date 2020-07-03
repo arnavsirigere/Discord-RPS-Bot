@@ -10,7 +10,7 @@ A discord bot for users to play Rock Paper Scissors against a AI
 
 `rps! score` - To view your overall score and my score against you!
 
-`rps! [rock, paper, scissors]` - To play a round with the AI
+`rps! [rock | paper | scissors]` - To play a round with the AI
 
 `rps! help` - To view all the commands
 
@@ -19,3 +19,9 @@ A discord bot for users to play Rock Paper Scissors against a AI
 `rps! cheat?` - It'll tell you if it cheats or not
 
 `rps! rules'` - It'll tell you the rules of the game
+
+## Leaderboard
+
+`rps! leaderboard` - To see what place you are at in the leaderboard
+
+`rps! leaderboard [n]` - To see the top n players in the leaderboard

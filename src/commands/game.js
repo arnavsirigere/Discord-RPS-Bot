@@ -3,6 +3,7 @@
 let gameMechanics = { rock: 'paper', paper: 'scissors', scissors: 'rock' };
 
 function game(userData, move, message, ref, data, database) {
+  userData.played = true;
   let history = userData.history;
   history.push(move);
   if (history[0] == 0) {
