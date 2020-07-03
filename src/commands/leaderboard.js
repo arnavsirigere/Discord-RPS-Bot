@@ -47,11 +47,22 @@ function leaderboard(id, message, data, userData, cmd) {
 
 function getLeaderBoard(num, players, getFull) {
   let reply = getFull ? 'Here is the leaderboard - \n\n' : num == 1 ? 'Here is the top player\n\n' : `Here are the top ${num} players - \n\n`;
+  let position = 1;
+  let streak = 1;
+  let streakOngoing = false;
   for (let i = 0; i < num; i++) {
-    let position = addOrdinalSuffix(i + 1);
     let name = players[i].name;
     let points = players[i].points;
-    reply += `${'`' + `${position} - ${name} (${points})` + '`'}\n`;
+    if (i > 0) {
+      if (players[i - 1].points == points) {
+        streak++;
+      } else {
+        position += streak;
+        streak = 1;
+      }
+    }
+    let place = addOrdinalSuffix(position);
+    reply += `${'`' + `${place} - ${name} (${points})` + '`'}\n`;
   }
   return reply;
 }
