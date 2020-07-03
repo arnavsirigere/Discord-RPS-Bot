@@ -37,16 +37,16 @@ function leaderboard(id, message, data, userData, cmd) {
     } else if (cmd == 0) {
       reply = 'Seriously, 0?';
     } else {
-      reply = getLeaderBoard(cmd, players);
+      reply = getLeaderBoard(cmd, players, false);
     }
   } else if (!cmd) {
-    reply = getLeaderBoard(players.length, players);
+    reply = getLeaderBoard(players.length, players, true);
   }
   message.reply(reply);
 }
 
-function getLeaderBoard(num, players) {
-  let reply = num == 1 ? 'Here is the top player\n\n' : `Here are the top ${num} players - \n\n`;
+function getLeaderBoard(num, players, getFull) {
+  let reply = getFull ? 'Here is the leaderboard - \n\n' : num == 1 ? 'Here is the top player\n\n' : `Here are the top ${num} players - \n\n`;
   for (let i = 0; i < num; i++) {
     let position = addOrdinalSuffix(i + 1);
     let name = players[i].name;
