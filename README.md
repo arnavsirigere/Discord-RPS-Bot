@@ -22,6 +22,8 @@ A discord bot for users to play Rock Paper Scissors against a AI
 
 ## Leaderboard
 
-`rps! leaderboard` - To see what place you are at in the leaderboard
+`rps! leaderboard` - To see the entire leaderboard
+
+`rps! leaderboard me` - To see what place you stand at in the leaderboard
 
 `rps! leaderboard [n]` - To see the top n players in the leaderboard

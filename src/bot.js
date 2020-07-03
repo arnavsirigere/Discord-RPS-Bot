@@ -54,7 +54,7 @@ client.on('message', (message) => {
     } else if (Object.keys(replies).includes(command[1])) {
       shortReply(command[1], message);
     } else if (command[1] == 'leaderboard') {
-      if (command[2] && /\d+/.test(command[2])) {
+      if (command[2] && (/\d+/.test(command[2]) || command[2] == 'me')) {
         leaderboard(id, message, data, userData, command[2]);
       } else {
         leaderboard(id, message, data, userData);

@@ -10,7 +10,8 @@ ${'`' + 'rps! help' + '`'} - Well, what you just used.
 ${'`' + 'rps! ping' + '`'} - Pong!
 ${'`' + 'rps! cheat?' + '`'} - I promise I don't cheat! 😊
 ${'`' + 'rps! rules' + '`'} - I'll tell you the rules of the game
-${'`' + 'rps! leaderboard' + '`'} - I'll tell you what place you are at in the leaderboard!
+${'`' + 'rps! leaderboard' + '`'} - I'll give you the entire leaderboard
+${'`' + 'rps! leaderboard me' + '`'} - I'll tell you what place you stand at in the leaderboard
 ${'`' + 'rps! leaderboard [n]' + '`'} - I'll tell you the top n players in the leaderboard!
 `;
   message.channel.send(reply);

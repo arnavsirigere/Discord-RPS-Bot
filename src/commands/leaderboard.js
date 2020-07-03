@@ -1,8 +1,9 @@
-// Command for showing the leaderboard -  sorted by the user who has the greatest positive difference between his score and the ai's score
-// You caan view top n players
+// Command for showing the leaderboard -  sorted by user with highest points
+// You can view top n players
 // Or what position you stand at
+// Or entire leaderboard
 
-function leaderboard(id, message, data, userData, num) {
+function leaderboard(id, message, data, userData, cmd) {
   let keys = Object.keys(data);
   let players = [];
   for (let i = 0; i < keys.length; i++) {
@@ -17,21 +18,7 @@ function leaderboard(id, message, data, userData, num) {
   players = players.sort((a, b) => b.points - a.points);
 
   let reply;
-  if (num) {
-    if (!players.length) {
-      reply = 'Nobody has made it to the leaderboard yet!';
-    } else if (num > players.length) {
-      reply = `${num} players haven't played the game yet!`;
-    } else {
-      reply = num == 1 ? 'Here is the top player\n\n' : `Here are the top ${num} players - \n\n`;
-      for (let i = 0; i < num; i++) {
-        let position = addOrdinalSuffix(i + 1);
-        let name = players[i].name;
-        let points = players[i].points;
-        reply += `${'`' + `${position} - ${name} (${points})` + '`'}\n`;
-      }
-    }
-  } else {
+  if (cmd && cmd == 'me') {
     if (!userData.played) {
       reply = "You haven't played yet!";
     } else {
@@ -41,12 +28,32 @@ function leaderboard(id, message, data, userData, num) {
           reply = `You're at the ${addOrdinalSuffix(i + 1)} position with a score of ${points} point${points == 1 ? '' : 's'}!`;
         }
       }
-      if (!players.length) {
-        reply = 'Nobody has made it to the leaderboard yet!';
-      }
     }
+  } else if (!players.length) {
+    reply = 'Nobody has made it to the leaderboard yet!';
+  } else if (/\d+/.test(cmd)) {
+    if (cmd > players.length) {
+      reply = `${cmd} players haven't played the game yet!`;
+    } else if (cmd == 0) {
+      reply = 'Seriously, 0?';
+    } else {
+      reply = getLeaderBoard(cmd, players);
+    }
+  } else if (!cmd) {
+    reply = getLeaderBoard(players.length, players);
   }
   message.reply(reply);
+}
+
+function getLeaderBoard(num, players) {
+  let reply = num == 1 ? 'Here is the top player\n\n' : `Here are the top ${num} players - \n\n`;
+  for (let i = 0; i < num; i++) {
+    let position = addOrdinalSuffix(i + 1);
+    let name = players[i].name;
+    let points = players[i].points;
+    reply += `${'`' + `${position} - ${name} (${points})` + '`'}\n`;
+  }
+  return reply;
 }
 
 function addOrdinalSuffix(num) {
