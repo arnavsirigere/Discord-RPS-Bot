@@ -12,7 +12,7 @@ function leaderboard(id, message, data, userData, cmd) {
     if (userData.played) {
       let points = userData.userScore;
       let { name, id } = userData;
-      players[i] = { name, points, id };
+      players.push({ name, points, id });
     }
   }
   players = players.sort((a, b) => b.points - a.points);
