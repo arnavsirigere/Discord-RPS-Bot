@@ -6,7 +6,7 @@ function game(userData, move, message, ref, data, database) {
   userData.played = true;
   let history = userData.history;
   history.push(move);
-  if (history[0] == 0) {
+  if (history[0] == 0 || history.length > 16) {
     history.shift();
   }
   let prediction = predictMove(move, history);
