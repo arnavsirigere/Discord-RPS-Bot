@@ -13,6 +13,7 @@ ${'`' + 'rps! rules' + '`'} - I'll tell you the rules of the game
 ${'`' + 'rps! leaderboard' + '`'} - I'll give you the entire leaderboard
 ${'`' + 'rps! leaderboard me' + '`'} - I'll tell you what place you stand at in the leaderboard
 ${'`' + 'rps! leaderboard [n]' + '`'} - I'll tell you the top n players in the leaderboard!
+${'`' + 'rps! congrats' + '`'} - 'Thank You 😊'
 `;
   message.channel.send(reply);
 }

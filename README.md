@@ -14,11 +14,13 @@ A discord bot for users to play Rock Paper Scissors against a AI
 
 `rps! help` - To view all the commands
 
+`rps! rules'` - It'll tell you the rules of the game
+
 `rps! ping` - Get a reply saying Pong!
 
 `rps! cheat?` - It'll tell you if it cheats or not
 
-`rps! rules'` - It'll tell you the rules of the game
+`rps! congrats` - Thank You 😊
 
 ## Leaderboard
 
