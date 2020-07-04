@@ -25,7 +25,7 @@ function leaderboard(id, message, data, userData, cmd) {
       for (let i = 0; i < players.length; i++) {
         if (players[i].id == id) {
           let points = players[i].points;
-          reply = `You're at the ${addOrdinalSuffix(i + 1)} position with a score of ${points} point${points == 1 ? '' : 's'}!`;
+          reply = `You're at ${addOrdinalSuffix(i + 1)} place with a score of ${points} point${points == 1 ? '' : 's'}!`;
         }
       }
     }
