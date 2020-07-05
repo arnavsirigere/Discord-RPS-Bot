@@ -9,7 +9,7 @@ function game(userData, move, message, ref, data, database) {
   if (history[0] == 0 || history.length > 16) {
     history.shift();
   }
-  let prediction = predictMove(move, history);
+  let prediction = predictMove(history[history.length - 2], history);
   let aiChoice = gameMechanics[prediction];
   let winner = gameMechanics[move] == aiChoice ? 'AI' : gameMechanics[aiChoice] == move ? 'USER' : 'TIE';
   let reply = `
