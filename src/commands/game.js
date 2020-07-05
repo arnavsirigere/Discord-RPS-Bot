@@ -9,7 +9,8 @@ function game(userData, move, message, ref, data, database) {
   if (history[0] == 0 || history.length > 16) {
     history.shift();
   }
-  let prediction = predictMove(history[history.length - 2], history);
+  let prevMove = history[history.length - 2];
+  let prediction = predictMove(prevMove, history.slice().splice(0, history.length - 1));
   let aiChoice = gameMechanics[prediction];
   let winner = gameMechanics[move] == aiChoice ? 'AI' : gameMechanics[aiChoice] == move ? 'USER' : 'TIE';
   let reply = `
@@ -28,8 +29,8 @@ function game(userData, move, message, ref, data, database) {
   updateData(userData, ref, data, database);
 }
 
-function predictMove(move, history) {
-  if (history.length == 1) {
+function predictMove(prevMove, history) {
+  if (history.length < 2) {
     return randomMove();
   }
   let ngrams = {};
@@ -40,10 +41,10 @@ function predictMove(move, history) {
     }
     ngrams[selection].push(history[i + 1]);
   }
-  let moves = ngrams[move];
+  let moves = ngrams[prevMove];
   let prediction;
   if (moves) {
-    prediction = random(ngrams[move]);
+    prediction = random(ngrams[prevMove]);
   } else {
     prediction = predictMove(history[history.length - 2], history);
   }
